@@ -14,7 +14,7 @@ module.exports = {
     let spaces = []
     getDirectories(spacesDirectory).forEach(directory => {
       var space = {
-        path: spacesPath + directory,
+        // path: spacesPath + directory, maybe add back later, idk
         directory: spacesDirectory + directory
       }
       space.config = this.getSpaceConfiguration(space)
@@ -28,6 +28,7 @@ module.exports = {
     }
     let rawdata = fs.readFileSync(space.directory + "/config.json")
     let spaceConfig = JSON.parse(rawdata);
+    // TODO: ADD VALIDATION
     return spaceConfig
   },
   getStaticAssetDirectoriesFromSpaces(spaces) {
@@ -45,7 +46,7 @@ module.exports = {
       let config = {
         id: space.config.slug,
         path: space.directory + "/docs",
-        routeBasePath: space.path
+        routeBasePath: spacesPath + space.config.slug
       }
 
       if (fs.existsSync(sidebarPath)) {
@@ -65,8 +66,8 @@ module.exports = {
     let navbarItems = []
     spaces.forEach(space => {
       let navbarItem = {
-        to: space.path,
-        label: space.alias,
+        to: spacesPath + space.config.slug,
+        label: space.config.name,
         position: 'left'
       }
       navbarItems.push(navbarItem)
