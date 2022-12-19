@@ -14,7 +14,6 @@ module.exports = {
     let spaces = []
     getDirectories(spacesDirectory).forEach(directory => {
       var space = {
-        name: directory,
         path: spacesPath + directory,
         directory: spacesDirectory + directory
       }
@@ -44,7 +43,7 @@ module.exports = {
       
       let sidebarPath = space.directory + '/sidebars.js'
       let config = {
-        id: space.name,
+        id: space.config.slug,
         path: space.directory + "/docs",
         routeBasePath: space.path
       }
@@ -67,7 +66,7 @@ module.exports = {
     spaces.forEach(space => {
       let navbarItem = {
         to: space.path,
-        label: space.name,
+        label: space.alias,
         position: 'left'
       }
       navbarItems.push(navbarItem)
