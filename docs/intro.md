@@ -1,4 +1,4 @@
----
-sidebar_position: 1
----
-# BnearIT Developer Documentation
+# Hello world
+```kroki type=plantuml
+  A --> B
+```

@@ -38,26 +38,25 @@ module.exports = {
     })
     return staticDirectories
   },
-  convertSpacesToPlugins(spaces) {
+  convertSpacesToPlugins(spaces, remarkPlugins) {
     let plugins = []
     spaces.forEach(space => {
-      
       let sidebarPath = space.directory + '/sidebars.js'
       let config = {
         id: space.config.slug,
         path: space.directory + "/docs",
-        routeBasePath: spacesPath + space.config.slug
+        routeBasePath: spacesPath + space.config.slug,
+        remarkPlugins: remarkPlugins,
+        sidebarPath: require.resolve('./sidebars.js')
       }
-
       if (fs.existsSync(sidebarPath)) {
         config.sidebarPath = require.resolve(sidebarPath)
       }
-
+      console.log(config)
       let plugin = [
-          '@docusaurus/plugin-content-docs',
-          config
-        ]
-      
+        '@docusaurus/plugin-content-docs',
+        config
+      ]
       plugins.push(plugin)
     })
     return plugins
@@ -66,9 +65,9 @@ module.exports = {
     let navbarItems = []
     spaces.forEach(space => {
       let navbarItem = {
-        to: spacesPath + space.config.slug,
         label: space.config.name,
-        position: 'left'
+        position: 'left',
+        to: spacesPath + space.config.slug
       }
       navbarItems.push(navbarItem)
     })

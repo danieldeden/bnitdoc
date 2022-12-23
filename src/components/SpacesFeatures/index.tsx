@@ -6,26 +6,19 @@ import Link from '@docusaurus/Link';
 export default function SpacesFeatures(): JSX.Element {
     const { siteConfig } = useDocusaurusContext();
     return (
-        <section>
-            <div className="container">
+            <div className={styles.spaces}>
                 <h1 className="header">All BnearIT Spaces</h1>
                 <section className="row">
-                    
                 {siteConfig.customFields.spaces.map((props, idx) => (
-                    <article className="col col--6 margin-bottom--lg" key={idx}>
-                            
-                        <Link className={clsx("card padding--lg", styles.spacesCard)} to={"/spaces/" + props.config.slug}>
-                                <section>
-                                    <h2 className="text--truncate"><img src={props.config.icon} hidden={!props.config.icon}></img>{props.config.title}</h2>
-                                    <p className="text--truncate">{props.config.description}</p>
-                                </section>
-                            
-                        </Link>
-                    </article>
-                    
+                                        <Link className={clsx("col col--6", styles.spacesCard)} key={idx} to={"/spaces/" + props.config.slug}>
+                                            <div className={clsx("card padding--lg", styles.spacesCard)}>
+                                                <h2 className="text--truncate"><img src={props.config.icon} hidden={!props.config.icon}></img>{props.config.title}</h2>
+                                                <p className="text--truncate">{props.config.description}</p>
+                                            </div>
+                                        </Link>
+                        
                     ))}
-                </section>
+                    </section>
             </div>
-        </section>
     )
 }
