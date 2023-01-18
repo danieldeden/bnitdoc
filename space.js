@@ -47,9 +47,7 @@ module.exports = {
         path: space.directory + "/docs",
         routeBasePath: spacesPath + space.config.slug,
         remarkPlugins: remarkPlugins,
-        sidebarPath: require.resolve('./sidebars.js'),
-        docLayoutComponent: "@theme/DocPage",
-        docItemComponent: "@theme/ApiItem"
+        sidebarPath: require.resolve('./sidebars.js')
       }
       if (fs.existsSync(sidebarPath)) {
         config.sidebarPath = require.resolve(sidebarPath)

@@ -32,7 +32,6 @@ module.exports = async function createConfig() {
       defaultLocale: 'en',
       locales: ['en'],
     },
-    themes: ["docusaurus-theme-openapi-docs"],
     presets: [
       [
         'classic',
