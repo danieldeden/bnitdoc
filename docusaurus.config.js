@@ -32,7 +32,7 @@ module.exports = async function createConfig() {
       defaultLocale: 'en',
       locales: ['en'],
     },
-
+    themes: ["docusaurus-theme-openapi-docs"],
     presets: [
       [
         'classic',
@@ -86,26 +86,22 @@ module.exports = async function createConfig() {
               title: 'Internal Documentaion',
               items: [
                 {
-                  label: 'Tutorial',
+                  label: 'Introduction',
                   to: '/docs/intro',
                 },
               ],
             },
-            /* {
+            {
               title: 'Spaces',
               items: [].concat(space.convertSpacesToNavbarItems(space.getAllSpaces()))
-            }, */
+            },
             {
               title: 'More',
               items: [
                 {
-                  label: 'Blog',
-                  to: '/blog',
-                },
-                {
-                  label: 'GitHub',
-                  href: 'https://github.com/facebook/docusaurus',
-                },
+                  label: 'BnearIT Homepage',
+                  to: 'https://www.bnearit.se',
+                }
               ],
             },
           ],

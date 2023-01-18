@@ -47,17 +47,17 @@ module.exports = {
         path: space.directory + "/docs",
         routeBasePath: spacesPath + space.config.slug,
         remarkPlugins: remarkPlugins,
-        sidebarPath: require.resolve('./sidebars.js')
+        sidebarPath: require.resolve('./sidebars.js'),
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem"
       }
       if (fs.existsSync(sidebarPath)) {
         config.sidebarPath = require.resolve(sidebarPath)
       }
-      console.log(config)
-      let plugin = [
+      plugins.push([
         '@docusaurus/plugin-content-docs',
         config
-      ]
-      plugins.push(plugin)
+      ])
     })
     return plugins
   },
