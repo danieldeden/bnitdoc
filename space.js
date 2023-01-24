@@ -60,15 +60,40 @@ module.exports = {
     return plugins
   },
   convertSpacesToNavbarItems(spaces) {
+    let projectMap = {}
     let navbarItems = []
     spaces.forEach(space => {
-      let navbarItem = {
+        if (space.config.project) {
+            let item = {
+                label: space.config.name,
+                to: spacesPath + space.config.slug
+            }
+            if (!projectMap[space.config.project]) {
+                projectMap[space.config.project] = [item]
+            } else {
+                projectMap[space.config.project].push(item)
+            }
+        }
+    })
+    Object.keys(projectMap).forEach(key => {
+        navbarItems.push({
+            label: key,
+            position: 'left',
+            items: projectMap[key]
+        })
+    })
+    return navbarItems
+  },
+  convertSpacesToFooterItems(spaces) {
+    let footerItems = []
+    spaces.forEach(space => {
+      let footerItem = {
         label: space.config.name,
         position: 'left',
         to: spacesPath + space.config.slug
       }
-      navbarItems.push(navbarItem)
+      footerItems.push(footerItem)
     })
-    return navbarItems
+    return footerItems
   }
 }

@@ -92,7 +92,7 @@ module.exports = async function createConfig() {
             },
             {
               title: 'Spaces',
-              items: [].concat(space.convertSpacesToNavbarItems(space.getAllSpaces()))
+              items: [].concat(space.convertSpacesToFooterItems(space.getAllSpaces()))
             },
             {
               title: 'More',
