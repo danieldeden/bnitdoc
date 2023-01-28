@@ -56,11 +56,10 @@ module.exports = async function createConfig() {
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         navbar: {
-          style: 'dark',
           title: 'Developer Documentation',
           logo: {
             alt: 'BnearIT Logo',
-            src: 'https://bnearit.se/wp-content/themes/bnearit/assets/images/bnearit.svg',
+            src: 'img/it.png',
           },
           items: [
             {
@@ -70,7 +69,6 @@ module.exports = async function createConfig() {
           ].concat(space.convertSpacesToNavbarItems(space.getAllSpaces())),
         },
         footer: {
-          style: 'dark',
           links: [
             {
               title: 'Spaces',
