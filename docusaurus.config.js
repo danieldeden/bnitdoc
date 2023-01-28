@@ -42,10 +42,7 @@ module.exports = async function createConfig() {
             remarkPlugins: remarkPlugins,
             editUrl:
               'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/'
-          },
-          theme: {
-            customCss: require.resolve('./src/css/custom.css'),
-          },
+          }
         }),
       ],
     ],
@@ -67,12 +64,6 @@ module.exports = async function createConfig() {
           },
           items: [
             {
-              type: 'doc',
-              docId: 'intro',
-              position: 'left',
-              label: 'Internal',
-            },
-            {
               label: 'All Spaces',
               to: "/spaces"
             },
@@ -81,15 +72,6 @@ module.exports = async function createConfig() {
         footer: {
           style: 'dark',
           links: [
-            {
-              title: 'Internal Documentaion',
-              items: [
-                {
-                  label: 'Introduction',
-                  to: '/docs/intro',
-                },
-              ],
-            },
             {
               title: 'Spaces',
               items: [].concat(space.convertSpacesToFooterItems(space.getAllSpaces()))
