@@ -4,8 +4,8 @@
 }  
 
 .spacesCard {
-    --ifm-link-color: var(--ifm-color-emphasis-800);
-    --ifm-link-hover-color: var(--ifm-color-emphasis-700);
+    --ifm-link-color: var(--ifm-color-emphasis-900);
+    --ifm-link-hover-color: var(--ifm-color-emphasis-800);
     --ifm-link-hover-decoration: none;
 }
 
