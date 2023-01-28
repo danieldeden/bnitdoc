@@ -1,28 +1,28 @@
 .spaces {
-    padding: 2rem 0;
-    width: 100%;
-}  
+  padding: 2rem 0;
+  width: 100%;
+}
 
 .spacesCard {
-    --ifm-link-color: var(--ifm-color-emphasis-900);
-    --ifm-link-hover-color: var(--ifm-color-emphasis-800);
-    --ifm-link-hover-decoration: none;
+  --ifm-link-color: var(--ifm-color-emphasis-900);
+  --ifm-link-hover-color: var(--ifm-color-emphasis-800);
+  --ifm-link-hover-decoration: none;
 }
 
 .spacesCard h2 {
-    color: var(--ifm-heading-color);
-    font-family: var(--ifm-heading-font-family);
-    font-weight: var(--ifm-heading-font-weight);
-    line-height: var(--ifm-heading-line-height);
-    margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
+  line-height: var(--ifm-heading-line-height);
+  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
 }
 
 .spacesCard p {
-    font-size: 0.8rem;
-    margin-bottom: 0px;
+  font-size: 0.8rem;
+  margin-bottom: 0px;
 }
 
 .spacesCard img {
-    height: 1em;
-    margin-right: 10px;
+  height: 1em;
+  margin-right: 10px;
 }
