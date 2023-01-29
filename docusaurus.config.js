@@ -67,8 +67,18 @@ module.exports = async function createConfig() {
           },
           items: [
             {
-              label: "All Spaces",
-              to: "/spaces",
+                label: "Bnitdoc",
+                to: "/docs",
+                items: [
+                    {
+                        label: "Setup",
+                        to: "/docs/setup"
+                    },
+                    {
+                        label: "Usage",
+                        to: "/docs/usage"
+                    }
+                ]
             },
           ].concat(space.convertSpacesToNavbarItems(space.getAllSpaces())),
         },
