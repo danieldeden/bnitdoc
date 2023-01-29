@@ -53,7 +53,7 @@ module.exports = async function createConfig() {
       spaces: space.getAllSpaces(),
     },
 
-    plugins: [].concat(
+    plugins: ["@lyrasearch/plugin-docusaurus"].concat(
       space.convertSpacesToPlugins(space.getAllSpaces(), remarkPlugins)
     ),
     themeConfig:

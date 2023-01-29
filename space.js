@@ -9,8 +9,13 @@ const getDirectories = (path) => {
 const spacesPath = "/spaces/";
 const spacesDirectory = "./spaces/";
 
+let cachedSpaces = undefined
+
 module.exports = {
   getAllSpaces() {
+    if (cachedSpaces) {
+        return cachedSpaces;
+    }
     let spaces = [];
     getDirectories(spacesDirectory).forEach((directory) => {
       var space = {
@@ -20,6 +25,7 @@ module.exports = {
       space.config = this.getSpaceConfiguration(space);
       spaces.push(space);
     });
+    cachedSpaces = spaces
     return spaces;
   },
   getSpaceConfiguration(space) {
