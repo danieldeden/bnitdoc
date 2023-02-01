@@ -41,10 +41,11 @@ module.exports = async function createConfig() {
         ({
           docs: {
             sidebarPath: require.resolve("./sidebars.js"),
-            remarkPlugins: remarkPlugins,
-            editUrl:
-              "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+            remarkPlugins: remarkPlugins
           },
+          theme: {
+            customCss: [require.resolve('./src/css/custom.css')]
+          }
         }),
       ],
     ],
