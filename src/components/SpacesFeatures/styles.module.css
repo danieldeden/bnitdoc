@@ -9,6 +9,10 @@
   --ifm-link-hover-decoration: none;
 }
 
+.cardRow {
+  row-gap: 10px;
+}
+
 .spacesCard h2 {
   color: var(--ifm-heading-color);
   font-family: var(--ifm-heading-font-family);

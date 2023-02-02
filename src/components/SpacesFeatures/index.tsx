@@ -8,7 +8,7 @@ export default function SpacesFeatures(): JSX.Element {
   return (
     <div className={styles.spaces}>
       <h1 className="header">All BnearIT Spaces</h1>
-      <section className="row">
+      <section className={clsx("row", styles.cardRow)}>
         {siteConfig.customFields.spaces.map((props, idx) => (
           <Link
             className={clsx("col col--6", styles.spacesCard)}
