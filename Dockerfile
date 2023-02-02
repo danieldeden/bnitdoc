@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM node:latest
+FROM node:bullseye-slim
 ENV NODE_ENV=development
 
 WORKDIR /app
