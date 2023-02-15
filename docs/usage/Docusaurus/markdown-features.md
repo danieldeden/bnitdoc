@@ -27,18 +27,6 @@ Regular Markdown images are supported.
 
 You can use absolute paths to reference images in the static directory (`static/img/it.png`):
 
-```md
-![Docusaurus logo](/img/it.png)
-```
-
-![Docusaurus logo](/img/it.png)
-
-You can reference images relative to the current file as well. This is particularly useful to colocate images close to the Markdown files using them:
-
-```md
-![Docusaurus logo](./img/it.png)
-```
-
 ## Code Blocks
 
 Markdown code blocks are supported with Syntax highlighting.

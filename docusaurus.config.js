@@ -6,30 +6,24 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const space = require("./space");
 const plugins = require("./plugins");
+const config = require('./config')
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = async function createConfig() {
   let remarkPlugins = (await plugins()).getRemarkPlugins();
   return {
-    title: "BnearIT Developer Documentation",
-    tagline: "Developer documentation made for and by BnearIT developers",
-    url: "https://your-docusaurus-test-site.com",
-    baseUrl: "/",
+    title: config.getConfig().title,
+    tagline: config.getConfig().tagline,
+    url: config.getConfig().url,
+    baseUrl: config.getConfig().baseUrl,
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
-    favicon: "img/favicon.ico",
-    staticDirectories: ["static"].concat(
+    favicon: "favicon.ico",
+    staticDirectories: ["site/static"].concat(
       space.getStaticAssetDirectoriesFromSpaces(space.getAllSpaces())
     ),
-
-    // GitHub pages deployment config.
-    // If you aren't using GitHub pages, you don't need these.
-    organizationName: "BnearIT", // Usually your GitHub org/user name.
-    projectName: "bnitdoc", // Usually your repo name.
-
-    // Even if you don't use internalization, you can use this field to set useful
-    // metadata like html lang. For example, if your site is Chinese, you may want
-    // to replace "en" with "zh-Hans".
+    organizationName: config.getConfig().organizationName,
+    projectName: config.getConfig().projectName,
     i18n: {
       defaultLocale: "en",
       locales: ["en"],
@@ -44,7 +38,7 @@ module.exports = async function createConfig() {
             remarkPlugins: remarkPlugins
           },
           theme: {
-            customCss: [require.resolve('./src/css/custom.css')]
+            customCss: [config.getConfig().customStyleSheet ? require.resolve("./site/" + config.getConfig().customStyleSheet) : require.resolve('./src/css/custom.css')]
           }
         }),
       ],
@@ -61,12 +55,12 @@ module.exports = async function createConfig() {
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         navbar: {
-          title: "Developer Documentation",
+          title: config.getConfig().navbar.title,
           logo: {
-            alt: "BnearIT Logo",
-            src: "img/it.png",
+            alt: "Logo",
+            src: "logo.png",
           },
-          items: [
+          items: (config.getConfig().showDefaultDocumentation ? [
             {
                 label: "Bnitdoc",
                 to: "/docs",
@@ -80,8 +74,8 @@ module.exports = async function createConfig() {
                         to: "/docs/usage"
                     }
                 ]
-            },
-          ].concat(space.convertSpacesToNavbarItems(space.getAllSpaces())),
+            }
+          ] : []).concat(space.convertSpacesToNavbarItems(space.getAllSpaces())),
         },
         footer: {
           links: [
@@ -92,16 +86,11 @@ module.exports = async function createConfig() {
               ),
             },
             {
-              title: "More",
-              items: [
-                {
-                  label: "BnearIT Homepage",
-                  to: "https://www.bnearit.se",
-                },
-              ],
+              title: config.getConfig().footer.heading,
+              items: config.getConfig().footer.items
             },
           ],
-          copyright: `Copyright © ${new Date().getFullYear()} BnearIT, AB.`,
+          copyright: `Copyright © ${new Date().getFullYear()} ${config.getConfig().organizationName}.`,
         },
         /* prism: {
           theme: lightCodeTheme,
