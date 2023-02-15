@@ -7,7 +7,7 @@ export default function SpacesFeatures(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <div className={styles.spaces}>
-      <h1 className="header">All BnearIT Spaces</h1>
+      <h1 className="header">Spaces /</h1>
       <section className={clsx("row", styles.cardRow)}>
         {siteConfig.customFields.spaces.map((props, idx) => (
           <Link
