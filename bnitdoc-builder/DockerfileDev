@@ -9,7 +9,16 @@ COPY ["./package.json", "./package-lock.json*", "./"]
 
 RUN npm install
 
-COPY . .
+COPY docs docs
+COPY spaces spaces
+COPY src src
+COPY static static
+COPY babel.config.js .
+COPY docusaurus.config.js .
+COPY plugins.js .
+COPY sidebars.js .
+COPY space.js .
+COPY config.js .
 
 EXPOSE 3000
 CMD [ "npm", "start" ]

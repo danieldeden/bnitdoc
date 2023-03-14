@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+    bnitdoc-collector:
+        image: bnitdoc-collector
+        build:
+            context: ./bnitdoc-collector
+            dockerfile: ./Dockerfile
+        volumes:
+            - ./volumes/ssh:/root/.ssh
+            - ./volumes/repos:/app/repos
+            - ./volumes/target:/app/target
+            - ./volumes/builder-config:/app/config
+    bnitdoc-builder:
+        image: bnitdoc-builder
+        build:
+            context: ./bnitdoc-builder
+            dockerfile: ./Dockerfile
+        volumes:
+            - ./volumes/target:/app/import
+            - ./volumes/www:/app/www
+            - ./volumes/site:/app/site
+    bnitdoc-hoster:
+        image: nginx
+        ports:
+            - 3000:80
+        volumes:
+            - ./volumes/www:/usr/share/nginx/html
+

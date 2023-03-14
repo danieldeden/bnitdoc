@@ -1,12 +1,13 @@
 # Dependencies
-/node_modules
+bnitdoc-builder/node_modules
 
 # Production
-/build
+bnitdoc-builder/build
+volumes/
 
 # Generated files
-.docusaurus
-.cache-loader
+bnitdoc-builder/.docusaurus
+bnitdoc-builder/.cache-loader
 
 # Misc
 .DS_Store
