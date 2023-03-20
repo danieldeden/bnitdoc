@@ -9,7 +9,7 @@ services:
             - ./volumes/ssh:/root/.ssh
             - ./volumes/repos:/app/repos
             - ./volumes/target:/app/target
-            - ./volumes/builder-config:/app/config
+            - ./volumes/collector-config:/app/config
     bnitdoc-builder:
         image: bnitdoc-builder
         build:
