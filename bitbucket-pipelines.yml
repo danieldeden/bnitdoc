@@ -15,8 +15,11 @@ pipelines:
             name: Build and Test
             script:
               - IMAGE_NAME=$BITBUCKET_REPO_SLUG
-              - docker build ./bnitdoc-builder --file Dockerfile --tag ${IMAGE_NAME}
-              - docker build ./bnitdoc-builder --file DockerfileDev --tag ${IMAGE_NAME}:dev
+              - cd bnitdoc-builder
+              - docker build . --file Dockerfile --tag ${IMAGE_NAME_BUILDER}
+              - docker build . --file DockerfileDev --tag ${IMAGE_NAME_DEV}
+              - cd ../bnitdoc-collector
+              - docker build . --file Dockerfile --tag ${IMAGE_NAME_COLLECTOR}
             services:
               - docker
             caches:
@@ -31,11 +34,17 @@ pipelines:
       - step:
           name: Build and Test
           script:
-            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
-            - docker build ./bnitdoc-builder --file Dockerfile --tag ${IMAGE_NAME}:dev
-            - docker save ${IMAGE_NAME} --output "${IMAGE_NAME}.tar"
-            - docker build ./bnitdoc-builder --file DockerfileDev --tag ${IMAGE_NAME}:dev
-            - docker save ${IMAGE_NAME}:dev --output "${IMAGE_NAME}-dev.tar"
+            - IMAGE_NAME_DEV=${BITBUCKET_REPO_SLUG}
+            - IMAGE_NAME_BUILDER=${BITBUCKET_REPO_SLUG}-builder
+            - IMAGE_NAME_COLLECTOR=${BITBUCKET_REPO_SLUG}-collector
+            - cd bnitdoc-builder
+            - docker build . --file Dockerfile --tag ${IMAGE_NAME_BUILDER}
+            - docker save ${IMAGE_NAME_BUILDER} --output "../${IMAGE_NAME_BUILDER}.tar"
+            - docker build . --file DockerfileDev --tag ${IMAGE_NAME_DEV}
+            - docker save ${IMAGE_NAME_DEV} --output "../${IMAGE_NAME_DEV}.tar"
+            - cd ../bnitdoc-collector
+            - docker build . --file Dockerfile --tag ${IMAGE_NAME_COLLECTOR}
+            - docker save ${IMAGE_NAME_COLLECTOR} --output "../${IMAGE_NAME_COLLECTOR}.tar"
           services:
             - docker
           caches:
@@ -47,15 +56,21 @@ pipelines:
           deployment: Production
           script:
             - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
-            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
-            - docker load --input "${IMAGE_NAME}.tar"
-            - docker load --input "${IMAGE_NAME}-dev.tar"
             - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
-            - DEV_VERSION="dev-0.1.${BITBUCKET_BUILD_NUMBER}"
+            - IMAGE_NAME=${BITBUCKET_REPO_SLUG}
+            - docker load --input "${IMAGE_NAME}.tar"
             - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
             - docker tag "${IMAGE_NAME}" "${IMAGE}:${VERSION}"
             - docker push "${IMAGE}:${VERSION}"
-            - docker tag "${IMAGE_NAME}:dev" "${IMAGE}:${DEV_VERSION}"
-            - docker push "${IMAGE}:${DEV_VERSION}"
+            - IMAGE_NAME=${BITBUCKET_REPO_SLUG}-builder
+            - docker load --input "${IMAGE_NAME}.tar"
+            - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
+            - docker tag "${IMAGE_NAME}" "${IMAGE}:${VERSION}"
+            - docker push "${IMAGE}:${VERSION}"
+            - IMAGE_NAME=${BITBUCKET_REPO_SLUG}-collector
+            - docker load --input "${IMAGE_NAME}.tar"
+            - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
+            - docker tag "${IMAGE_NAME}" "${IMAGE}:${VERSION}"
+            - docker push "${IMAGE}:${VERSION}"
           services:
             - docker
